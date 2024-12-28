@@ -50,182 +50,166 @@ function Header() {
 
   const handleCartClick = () => {
     if (cartItems.length > 0) {
-      navigate("/cart"); // Navigate to cart if items are present
+      // Navigate to cart if items are present
+      navigate("/cart"); 
     } else {
-      setOpenSnackbar(true); // Show "Cart is empty" message
+      // Show "Cart is empty" message
+      setOpenSnackbar(true); 
     }
   };
 
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false); // Close the snackbar after 3 seconds
+    // Close the snackbar after 3 seconds
+    setOpenSnackbar(false); 
   };
 
   return (
     <>
-      <AppBar position="sticky">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              // Use Link here for routing
-              component={Link}
-              // Link to the home page
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ROYALKING
-            </Typography>
+     <AppBar position="fixed" sx={{ top: 0, width: "100%" }}>
+  <Container maxWidth="xl">
+    <Toolbar disableGutters>
+      <Typography
+        variant="h6"
+        noWrap
+        component={Link}
+        to="/"
+        sx={{
+          mr: 2,
+          display: { xs: "none", md: "flex" },
+          fontFamily: "monospace",
+          fontWeight: 700,
+          letterSpacing: ".3rem",
+          color: "inherit",
+          textDecoration: "none",
+        }}
+      >
+        ROYALKING
+      </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      <Link
-                        to={`/${page.toLowerCase()}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        {page}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-
-            <Typography
-              variant="h5"
-              noWrap
-              component={Link}
-              // Link to the home page
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ROYALKING
-            </Typography>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+      {/* Mobile menu */}
+      <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        <IconButton
+          size="large"
+          aria-label="menu"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleOpenNavMenu}
+          color="inherit"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorElNav}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          open={Boolean(anchorElNav)}
+          onClose={handleCloseNavMenu}
+        >
+          {pages.map((page) => (
+            <MenuItem key={page} onClick={handleCloseNavMenu}>
+              <Typography sx={{ textAlign: "center" }}>
+                <Link
+                  to={`/${page.toLowerCase()}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Link
-                    to={`/${page.toLowerCase()}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    {page}
-                  </Link>
-                </Button>
-              ))}
-            </Box>
+                  {page}
+                </Link>
+              </Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
 
-            <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
-              <Tooltip title="Shopping Cart">
-                <IconButton
-                  sx={{ color: "white", marginRight: 2 }}
-                  onClick={handleCartClick}
-                >
-                  <Badge badgeContent={cartItems.length} color="error">
-                    <ShoppingCartSharpIcon />
-                  </Badge>
-                </IconButton>
-              </Tooltip>
-
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-
-          {/* Snackbar for "Cart is empty" message */}
-          <Snackbar
-            open={openSnackbar}
-            autoHideDuration={3000}
-            onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      {/* Desktop menu */}
+      <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        {pages.map((page) => (
+          <Button
+            key={page}
+            onClick={handleCloseNavMenu}
+            sx={{ my: 2, color: "white", display: "block" }}
           >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="warning"
-              sx={{ width: "100%" }}
+            <Link
+              to={`/${page.toLowerCase()}`}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              Your cart is empty.
-            </Alert>
-          </Snackbar>
-        </Container>
-      </AppBar>
+              {page}
+            </Link>
+          </Button>
+        ))}
+      </Box>
+
+      {/* Cart and Avatar */}
+      <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+        <Tooltip title="Shopping Cart">
+          <IconButton
+            sx={{ color: "white", marginRight: 2 }}
+            onClick={handleCartClick}
+          >
+            <Badge badgeContent={cartItems.length} color="error">
+              <ShoppingCartSharpIcon />
+            </Badge>
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+        </Tooltip>
+
+        <Menu
+          sx={{ mt: "45px" }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <Typography sx={{ textAlign: "center" }}>
+                {setting}
+              </Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+    </Toolbar>
+
+    {/* Snackbar for "Cart is empty" message */}
+    <Snackbar
+      open={openSnackbar}
+      autoHideDuration={3000}
+      onClose={handleCloseSnackbar}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    >
+      <Alert
+        onClose={handleCloseSnackbar}
+        severity="warning"
+        sx={{ width: "100%" }}
+      >
+        Your cart is empty.
+      </Alert>
+    </Snackbar>
+  </Container>
+</AppBar>
+
     </>
   );
 }

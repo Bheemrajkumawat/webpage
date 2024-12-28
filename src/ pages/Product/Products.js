@@ -8,101 +8,31 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
-
 import { useDispatch } from "react-redux";
-import { addItem } from "../../Redux/Slice";
+import { addItem } from "../../Redux/Slice"; // Ensure correct import
 
 const cardData = [
-  {
-    id: 1,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 2,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 3,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 4,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 5,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 6,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 7,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 8,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 9,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 10,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 11,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
-  {
-    id: 12,
-    title: "Spread Collar Shirt",
-    description: " price: ₹ 500",
-    image: "imageCart/img1.jpg",
-  },
+  { id: 1, title: "Spread Collar Shirt", description: 500, image: "imageCart/img1.jpg" },
+  { id: 2, title: "Slim Fit Jeans", description: 600, image: "imageCart/img2.jpg" },
+  { id: 3, title: "Casual T-Shirt", description: 300, image: "imageCart/img3.jpg" },
+  // Add more items here...
 ];
 
 const Products = () => {
   const dispatch = useDispatch();
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        marginTop:"30px"
       }}
     >
       {/* Main Content */}
       <Box sx={{ flex: 1, padding: "20px" }}>
-        <Typography
-          variant="h4"
-          sx={{ mb: 4, textAlign: "center", marginTop: "20px" }}
-        >
+        <Typography variant="h4" sx={{ mb: 4, textAlign: "center", marginTop: "20px" }}>
           PRODUCTS
         </Typography>
         <Grid container spacing={2} justifyContent="center">
@@ -120,20 +50,17 @@ const Products = () => {
                     <Typography gutterBottom variant="h5" component="div">
                       {card.title}
                     </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      {card.description}
+                    <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                      ₹ {card.description}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
                   <Button
-                    onClick={(e) => {
-                      console.log("Button clicked!");
+                    onClick={() => {
                       dispatch(
                         addItem({
+                          id: card.id,
                           image: card.image,
                           title: card.title,
                           description: card.description,
@@ -143,7 +70,7 @@ const Products = () => {
                     size="small"
                     color="primary"
                   >
-                    addtocard
+                    Add to Cart
                   </Button>
                 </CardActions>
               </Card>
@@ -166,7 +93,9 @@ const Products = () => {
           textAlign: "center",
           lineHeight: "60px",
         }}
-      ></Box>
+      >
+        Footer Content
+      </Box>
     </Box>
   );
 };
