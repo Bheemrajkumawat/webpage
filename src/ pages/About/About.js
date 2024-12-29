@@ -43,10 +43,10 @@ const About = () => {
           Who We Are
         </Typography>
         <Typography variant="body1" sx={{ textAlign: "center", color: "#666" }}>
-          Welcome to [ROYALKING]! We are your one-stop destination
-          for high-quality products that cater to your everyday needs. Our goal
-          is to deliver the best online shopping experience with a wide range
-          of products at unbeatable prices.
+          Welcome to [ROYALKING]! We are your one-stop destination for
+          high-quality products that cater to your everyday needs. Our goal is
+          to deliver the best online shopping experience with a wide range of
+          products at unbeatable prices.
         </Typography>
       </Paper>
 

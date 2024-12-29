@@ -8,6 +8,7 @@ import Cart from "../ pages/Carts/Cart";
 import Contact from "../ pages/Contact/Contact";
 import Footer from "../components/Footer/Footer";
 import About from "../ pages/About/About";
+import Profile from "../profile/Profile";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
           <Route path="cart" element={<Cart />}></Route>
           <Route path="contact" element={<Contact />}></Route>
           <Route path="about" element={<About />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
         </Routes>
       </BrowserRouter>
       <Footer />

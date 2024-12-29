@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Paper,
-} from "@mui/material";
+import { Box, Typography, TextField, Button, Grid, Paper } from "@mui/material";
 
 const Contact = () => {
   return (
@@ -171,4 +164,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

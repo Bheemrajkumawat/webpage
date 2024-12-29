@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../Redux/Slice"; // Ensure correct import
+import { addItem } from "../../Redux/Slice";
 
 const cardData = [
   {
@@ -30,6 +30,62 @@ const cardData = [
     description: 300,
     image: "imageCart/img3.jpg",
   },
+  {
+    id: 4,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img4.jpg",
+  },
+  {
+    id: 5,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img5.jpg",
+  },
+  {
+    id: 6,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img7.jpg",
+  },
+  {
+    id: 7,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img8.jpg",
+  },
+  {
+    id: 8,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img9.jpg",
+  },
+  {
+    id: 9,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img10.jpg",
+  },
+  {
+    id: 10,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img11.jpg",
+  },
+  {
+    id: 11,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img12.jpg",
+  },
+  {
+    id: 12,
+    title: "Casual T-Shirt",
+    description: 300,
+    image: "imageCart/img13.jpg",
+  },
+ 
+
   // Add more items here...
 ];
 
@@ -98,24 +154,6 @@ const Products = () => {
             </Grid>
           ))}
         </Grid>
-      </Box>
-
-      {/* Footer */}
-      <Box
-        component="footer"
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          height: "60px",
-          backgroundColor: "#333",
-          color: "white",
-          textAlign: "center",
-          lineHeight: "60px",
-        }}
-      >
-        Footer Content
       </Box>
     </Box>
   );

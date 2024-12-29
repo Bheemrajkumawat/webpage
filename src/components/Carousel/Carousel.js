@@ -13,12 +13,12 @@ const carouselItems = [
   {
     label: "Slide 2",
     description: "This is the second slide",
-    image: "Carouselimage/img.webp",
+    image: "Carouselimage/img222.webp",
   },
   {
     label: "Slide 3",
     description: "This is the third slide",
-    image: "Carouselimage/img.webp",
+    image: "Carouselimage/img111.webp",
   },
 ];
 
@@ -43,7 +43,7 @@ const Carousel = () => {
             sx={{
               position: "relative",
               width: "100%",
-              height: { xs: "300px", sm: "400px", md: "600px" }, // Responsive height
+              height: { xs: "300px", sm: "400px", md: "600px" }, 
             }}
           >
             <img
@@ -52,7 +52,7 @@ const Carousel = () => {
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover", // Maintains aspect ratio
+                objectFit: "cover", 
               }}
             />
             <Box

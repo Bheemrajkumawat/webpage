@@ -5,8 +5,6 @@ import Products from "../Product/Products";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
-    navigate("/")
   return (
     <>
       <Carousel />

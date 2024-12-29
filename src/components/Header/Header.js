@@ -65,7 +65,7 @@ function Header() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ top: 0, width: "100%" }}>
+      <AppBar sx={{ top: 0, width: "100%" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -184,7 +184,12 @@ function Header() {
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography sx={{ textAlign: "center" }}>
-                      {setting}
+                      <Link
+                        to={`/${setting.toLowerCase()}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        {setting}
+                      </Link>
                     </Typography>
                   </MenuItem>
                 ))}

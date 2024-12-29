@@ -39,7 +39,7 @@ const Slice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload
       );
-      if (itemIndex !== -1) {
+      if (itemIndex !== -1){
         state.cartItems[itemIndex].quantity += 1;
       }
 
