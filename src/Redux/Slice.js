@@ -12,7 +12,9 @@ const Slice = createSlice({
   reducers: {
     // Add item to cart
     addItem: (state, action) => {
-      const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
       if (itemIndex !== -1) {
         // If item exists, increment quantity
         state.cartItems[itemIndex].quantity += 1;
@@ -22,47 +24,78 @@ const Slice = createSlice({
       }
 
       // Update total quantity and amount
-      state.cartTotalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
-      state.cartTotalAmount = state.cartItems.reduce((total, item) => total + (item.quantity * item.description), 0);
+      state.cartTotalQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      state.cartTotalAmount = state.cartItems.reduce(
+        (total, item) => total + item.quantity * item.description,
+        0
+      );
     },
 
     // Increment item quantity
     incrementItem: (state, action) => {
-      const itemIndex = state.cartItems.findIndex(item => item.id === action.payload);
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity += 1;
       }
 
       // Update total quantity and amount
-      state.cartTotalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
-      state.cartTotalAmount = state.cartItems.reduce((total, item) => total + (item.quantity * item.description), 0);
+      state.cartTotalQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      state.cartTotalAmount = state.cartItems.reduce(
+        (total, item) => total + item.quantity * item.description,
+        0
+      );
     },
 
     // Decrement item quantity
     decrementItem: (state, action) => {
-      const itemIndex = state.cartItems.findIndex(item => item.id === action.payload);
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
       if (itemIndex !== -1 && state.cartItems[itemIndex].quantity > 1) {
         state.cartItems[itemIndex].quantity -= 1;
       }
 
       // Update total quantity and amount
-      state.cartTotalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
-      state.cartTotalAmount = state.cartItems.reduce((total, item) => total + (item.quantity * item.description), 0);
+      state.cartTotalQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      state.cartTotalAmount = state.cartItems.reduce(
+        (total, item) => total + item.quantity * item.description,
+        0
+      );
     },
 
     // Remove item from cart
     removeItem: (state, action) => {
-      const itemIndex = state.cartItems.findIndex(item => item.id === action.payload);
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
       if (itemIndex !== -1) {
         state.cartItems.splice(itemIndex, 1);
       }
 
       // Update total quantity and amount
-      state.cartTotalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
-      state.cartTotalAmount = state.cartItems.reduce((total, item) => total + (item.quantity * item.description), 0);
+      state.cartTotalQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      state.cartTotalAmount = state.cartItems.reduce(
+        (total, item) => total + item.quantity * item.description,
+        0
+      );
     },
   },
 });
 
-export const { addItem, incrementItem, decrementItem, removeItem } = Slice.actions;
+export const { addItem, incrementItem, decrementItem, removeItem } =
+  Slice.actions;
 export default Slice.reducer;

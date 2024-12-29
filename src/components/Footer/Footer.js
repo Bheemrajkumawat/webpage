@@ -7,15 +7,15 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        position: "fixed", // Keeps it fixed
+        // position: "fixed", 
         bottom: 0,
         left: 0,
         width: "100%",
         backgroundColor: "primary.main",
         color: "white",
-        py: 1, // Adjust height
+        py: 1, 
         boxShadow: 3,
-        zIndex: 1000, // Ensure it stays above other elements
+        zIndex: 1000,
       }}
     >
       <Grid
@@ -47,11 +47,15 @@ const Footer = () => {
               marginRight: 10,
             }}
           /> */}
-          <Typography  style={{
+          <Typography
+            style={{
               width: "50px",
               height: "50px",
               marginRight: 10,
-            }}>ROYALKING</Typography>
+            }}
+          >
+            ROYALKING
+          </Typography>
         </Grid>
 
         {/* Quick Links Section */}
@@ -150,7 +154,7 @@ const Footer = () => {
                 textAlign: { xs: "center", sm: "left" },
               }}
             >
-              8898989898
+              +1 234 567 890
             </Typography>
           </Box>
         </Grid>

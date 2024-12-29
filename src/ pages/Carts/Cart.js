@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem, decrementItem, removeItem } from "../../Redux/Slice";
-import { Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -14,11 +26,11 @@ const Cart = () => {
     setIsRedirecting(true);
     setTimeout(() => {
       navigate("/payment");
-    }, 1000);
+    }, 2000); // Delay for loader
   };
 
   return (
-    <Box sx={{ marginTop: "80px", paddingBottom: "80px" }}> {/* Adjusted for fixed header and footer */}
+    <Box sx={{ marginTop: "80px", paddingBottom: "80px" }}>
       <TableContainer
         component={Paper}
         sx={{
@@ -26,8 +38,8 @@ const Cart = () => {
           overflowX: "auto",
           textAlign: "center",
           padding: "20px",
-          '@media (max-width: 600px)': {
-            padding: '10px',
+          "@media (max-width: 600px)": {
+            padding: "10px",
           },
         }}
       >
@@ -60,23 +72,28 @@ const Cart = () => {
                     </TableCell>
                     <TableCell align="center">{item.title}</TableCell>
                     <TableCell align="center">
-                      {/* Increment and Decrement Buttons */}
-                      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
                         <Button
                           variant="contained"
                           size="small"
                           onClick={() => dispatch(decrementItem(item.id))}
                           disabled={item.quantity <= 1}
                           sx={{
-                            minWidth: "35px",  // Increased width
-                            height: "35px",    // Increased height
-                            fontSize: "16px",  // Adjust font size
-                            padding: "0",      // Remove extra padding
-                            margin: "0 5px",   // Add margin between buttons
-                            '@media (max-width: 600px)': {
-                              minWidth: '40px', // Button width on mobile
-                              height: '40px',   // Button height on mobile
-                              fontSize: '18px', // Font size on mobile
+                            minWidth: "35px",
+                            height: "35px",
+                            fontSize: "16px",
+                            padding: "0",
+                            margin: "0 5px",
+                            "@media (max-width: 600px)": {
+                              minWidth: "40px",
+                              height: "40px",
+                              fontSize: "18px",
                             },
                           }}
                         >
@@ -88,15 +105,15 @@ const Cart = () => {
                           size="small"
                           onClick={() => dispatch(incrementItem(item.id))}
                           sx={{
-                            minWidth: "35px",  // Increased width
-                            height: "35px",    // Increased height
-                            fontSize: "16px",  // Adjust font size
-                            padding: "0",      // Remove extra padding
-                            margin: "0 5px",   // Add margin between buttons
-                            '@media (max-width: 600px)': {
-                              minWidth: '40px', // Button width on mobile
-                              height: '40px',   // Button height on mobile
-                              fontSize: '18px', // Font size on mobile
+                            minWidth: "35px",
+                            height: "35px",
+                            fontSize: "16px",
+                            padding: "0",
+                            margin: "0 5px",
+                            "@media (max-width: 600px)": {
+                              minWidth: "40px",
+                              height: "40px",
+                              fontSize: "18px",
                             },
                           }}
                         >
@@ -122,7 +139,10 @@ const Cart = () => {
                 ))}
               </TableBody>
             </Table>
-            <Typography variant="h6" sx={{ textAlign: "right", paddingRight: "20px" }}>
+            <Typography
+              variant="h6"
+              sx={{ textAlign: "right", paddingRight: "20px" }}
+            >
               Grand Total: ₹{cartTotalAmount}
             </Typography>
             <Button
@@ -135,13 +155,17 @@ const Cart = () => {
                 display: "block",
                 mx: "auto",
                 marginTop: "10px",
-                '@media (max-width: 600px)': {
-                  width: '80%',  // Responsive width
-                  height: '45px', // Increase height for touch targets
+                "@media (max-width: 600px)": {
+                  width: "80%",
+                  height: "45px",
                 },
               }}
             >
-              Buy Now
+              {isRedirecting ? (
+                <CircularProgress size={24} sx={{ color: "#fff" }} />
+              ) : (
+                "Buy Now"
+              )}
             </Button>
           </>
         ) : (
@@ -150,39 +174,6 @@ const Cart = () => {
           </Typography>
         )}
       </TableContainer>
-
-      {/* Fixed Footer */}
-      <Box
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "#fff",
-          padding: "10px 0",
-          boxShadow: "0 -2px 5px rgba(0,0,0,0.1)",
-          textAlign: "center",
-          zIndex: 10,
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleBuyNow}
-          sx={{
-            width: "150px",
-            height: "40px",
-            display: "block",
-            mx: "auto",
-            '@media (max-width: 600px)': {
-              width: '80%', // Responsive width
-              height: '50px', // Larger height on mobile
-            },
-          }}
-        >
-          Buy Now
-        </Button>
-      </Box>
     </Box>
   );
 };
