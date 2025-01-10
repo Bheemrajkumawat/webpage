@@ -1,177 +1,87 @@
 import React from "react";
-import { Box, Grid, Typography, Link, IconButton } from "@mui/material";
+import { Grid, Typography, Link, IconButton } from "@mui/material";
 import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
 import CallIcon from "@mui/icons-material/Call";
+import "./Footer.css"; // Import external CSS
 
 const Footer = () => {
   return (
-    <Box
-      sx={{
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        backgroundColor: "primary.main",
-        color: "white",
-        py: 1, 
-        boxShadow: 3,
-        zIndex: 1000,
-      }}
-    >
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          textAlign: { xs: "center", sm: "left" },
-        }}
-      >
-        {/* Logo Section */}
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: { xs: "center", sm: "flex-start" },
-          }}
-        >
-          {/* <img
-            src="logo/toyota-logo.png" // Replace with your logo URL
-            alt="Logo"
-            style={{
-              width: "50px",
-              height: "50px",
-              marginRight: 10,
-            }}
-          /> */}
-          <Typography
-            style={{
-              width: "50px",
-              height: "50px",
-              marginRight: 10,
-            }}
-          >
-            ROYALKING
-          </Typography>
-        </Grid>
+    <div className="footer-container">
+      <div className="footer-grid">
+        <Grid container spacing={2}>
+          {/* Logo Section */}
+          <Grid item xs={12} sm={4}>
+            <div className="footer-logo">
+              <Typography className="footer-logo-text">ROYALKING</Typography>
+            </div>
+          </Grid>
 
-        {/* Quick Links Section */}
-        <Grid item xs={12} sm={4}>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: "10px", sm: "12px" }, mb: 1 }}
-          >
-            Quick Links
-          </Typography>
-          <Box>
-            <Link
-              href="/"
-              color="inherit"
-              underline="hover"
-              sx={{ mr: 1, fontSize: { xs: "10px", sm: "12px" } }}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              color="inherit"
-              underline="hover"
-              sx={{ mr: 1, fontSize: { xs: "10px", sm: "12px" } }}
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              color="inherit"
-              underline="hover"
-              sx={{ fontSize: { xs: "10px", sm: "12px" } }}
-            >
-              Contact
-            </Link>
-          </Box>
-        </Grid>
-
-        {/* Social Media Icons */}
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: { xs: "center", sm: "flex-start" },
-          }}
-        >
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: "10px", sm: "12px" }, mb: 1 }}
-          >
-            Follow Us
-          </Typography>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <IconButton
-              href="https://facebook.com"
-              target="_blank"
-              color="inherit"
-              size="small"
-            >
-              <Facebook fontSize="small" />
-            </IconButton>
-            <IconButton
-              href="https://twitter.com"
-              target="_blank"
-              color="inherit"
-              size="small"
-            >
-              <Twitter fontSize="small" />
-            </IconButton>
-            <IconButton
-              href="https://instagram.com"
-              target="_blank"
-              color="inherit"
-              size="small"
-            >
-              <Instagram fontSize="small" />
-            </IconButton>
-            <IconButton
-              href="https://linkedin.com"
-              target="_blank"
-              color="inherit"
-              size="small"
-            >
-              <LinkedIn fontSize="small" />
-            </IconButton>
-          </Box>
-          <Box sx={{ mt: 0.5, display: "flex", alignItems: "center", gap: 1 }}>
-            <CallIcon sx={{ fontSize: { xs: 16, sm: 20 } }} />
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: { xs: "10px", sm: "12px" },
-                textAlign: { xs: "center", sm: "left" },
-              }}
-            >
-              +1 234 567 890
+          {/* Quick Links Section */}
+          <Grid item xs={12} sm={4}>
+            <Typography variant="body1" className="footer-section-title">
+              Quick Links
             </Typography>
-          </Box>
+            <div className="footer-quick-links">
+              <Link href="/" color="inherit">
+                Home
+              </Link>
+              <Link href="/about" color="inherit">
+                About
+              </Link>
+              <Link href="/contact" color="inherit">
+                Contact
+              </Link>
+            </div>
+          </Grid>
+
+          {/* Social Media Icons */}
+          <Grid item xs={12} sm={4}>
+            <Typography variant="body1" className="footer-section-title">
+              Follow Us
+            </Typography>
+            <div className="footer-social-icons">
+              <IconButton
+                href="https://facebook.com"
+                target="_blank"
+                size="small"
+              >
+                <Facebook fontSize="small" />
+              </IconButton>
+              <IconButton
+                href="https://twitter.com"
+                target="_blank"
+                size="small"
+              >
+                <Twitter fontSize="small" />
+              </IconButton>
+              <IconButton
+                href="https://instagram.com"
+                target="_blank"
+                size="small"
+              >
+                <Instagram fontSize="small" />
+              </IconButton>
+              <IconButton
+                href="https://linkedin.com"
+                target="_blank"
+                size="small"
+              >
+                <LinkedIn fontSize="small" />
+              </IconButton>
+            </div>
+            <div className="footer-call">
+              <CallIcon />
+              <Typography variant="body2">+1 234 567 890</Typography>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
 
       {/* Footer Bottom */}
-      <Box
-        sx={{
-          textAlign: "center",
-          mt: 1,
-          pt: 0.5,
-          fontSize: { xs: "10px", sm: "12px" },
-          borderTop: "1px solid rgba(255, 255, 255, 0.2)",
-        }}
-      >
+      <div className="footer-bottom">
         &copy; {new Date().getFullYear()} ROYALKING. royalking@gmail.com.
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

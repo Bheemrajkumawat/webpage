@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import { Box, Typography } from "@mui/material";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const carouselItems = [
@@ -43,7 +43,7 @@ const Carousel = () => {
             sx={{
               position: "relative",
               width: "100%",
-              height: { xs: "300px", sm: "400px", md: "600px" }, 
+              height: { xs: "300px", sm: "400px", md: "600px" },
             }}
           >
             <img
@@ -52,7 +52,7 @@ const Carousel = () => {
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover", 
+                objectFit: "cover",
               }}
             />
             <Box

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem, decrementItem, removeItem } from "../../Redux/Slice";
 import {
@@ -11,7 +12,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Box,
   CircularProgress,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -30,19 +30,8 @@ const Cart = () => {
   };
 
   return (
-    <Box sx={{ marginTop: "80px", paddingBottom: "80px" }}>
-      <TableContainer
-        component={Paper}
-        sx={{
-          marginTop: "20px",
-          overflowX: "auto",
-          textAlign: "center",
-          padding: "20px",
-          "@media (max-width: 600px)": {
-            padding: "10px",
-          },
-        }}
-      >
+    <div className="cart-container">
+      <TableContainer component={Paper} className="table-container">
         {cartItems.length > 0 ? (
           <>
             <Table sx={{ minWidth: 650 }} aria-label="cart table">
@@ -63,39 +52,18 @@ const Cart = () => {
                       <img
                         src={item.image}
                         alt={item.title}
-                        style={{
-                          width: "80px",
-                          height: "80px",
-                          objectFit: "contain",
-                        }}
+                        className="cart-image"
                       />
                     </TableCell>
                     <TableCell align="center">{item.title}</TableCell>
                     <TableCell align="center">
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                      <div className="quantity-buttons">
                         <Button
                           variant="contained"
                           size="small"
                           onClick={() => dispatch(decrementItem(item.id))}
                           disabled={item.quantity <= 1}
-                          sx={{
-                            minWidth: "35px",
-                            height: "35px",
-                            fontSize: "16px",
-                            padding: "0",
-                            margin: "0 5px",
-                            "@media (max-width: 600px)": {
-                              minWidth: "40px",
-                              height: "40px",
-                              fontSize: "18px",
-                            },
-                          }}
+                          className="quantity-button"
                         >
                           -
                         </Button>
@@ -104,22 +72,11 @@ const Cart = () => {
                           variant="contained"
                           size="small"
                           onClick={() => dispatch(incrementItem(item.id))}
-                          sx={{
-                            minWidth: "35px",
-                            height: "35px",
-                            fontSize: "16px",
-                            padding: "0",
-                            margin: "0 5px",
-                            "@media (max-width: 600px)": {
-                              minWidth: "40px",
-                              height: "40px",
-                              fontSize: "18px",
-                            },
-                          }}
+                          className="quantity-button"
                         >
                           +
                         </Button>
-                      </Box>
+                      </div>
                     </TableCell>
                     <TableCell align="center">₹{item.description}</TableCell>
                     <TableCell align="center">
@@ -139,27 +96,14 @@ const Cart = () => {
                 ))}
               </TableBody>
             </Table>
-            <Typography
-              variant="h6"
-              sx={{ textAlign: "right", paddingRight: "20px" }}
-            >
+            <Typography variant="h6" className="grand-total">
               Grand Total: ₹{cartTotalAmount}
             </Typography>
             <Button
               variant="contained"
               color="primary"
               onClick={handleBuyNow}
-              sx={{
-                width: "150px",
-                height: "40px",
-                display: "block",
-                mx: "auto",
-                marginTop: "10px",
-                "@media (max-width: 600px)": {
-                  width: "80%",
-                  height: "45px",
-                },
-              }}
+              className="buy-now-button"
             >
               {isRedirecting ? (
                 <CircularProgress size={24} sx={{ color: "#fff" }} />
@@ -169,12 +113,12 @@ const Cart = () => {
             </Button>
           </>
         ) : (
-          <Typography variant="h6" sx={{ textAlign: "center", color: "gray" }}>
+          <Typography variant="h6" className="empty-cart-message">
             Your cart is empty.
           </Typography>
         )}
       </TableContainer>
-    </Box>
+    </div>
   );
 };
 

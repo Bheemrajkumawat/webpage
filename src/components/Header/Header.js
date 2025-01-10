@@ -1,4 +1,3 @@
-// import * as React from "react";
 import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
 
 const pages = ["Products", "Cart"];
-const settings = ["Profile", "Dashboard", "Logout"];
+const settings = ["Profile", "Dashboard","Login"];
 
 function Header() {
   const navigate = useNavigate();
@@ -34,8 +33,8 @@ function Header() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (url) => {
+    navigate(url)
   };
 
   const handleCloseUserMenu = () => {
@@ -43,6 +42,8 @@ function Header() {
   };
 
   const cartItems = useSelector((state) => state.cart.cartItems || []);
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  
 
   console.log("Items", cartItems);
 
@@ -68,25 +69,7 @@ function Header() {
       <AppBar sx={{ top: 0, width: "100%" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ROYALKING
-            </Typography>
-
-            {/* Mobile menu */}
+            {/* Mobile menu icon first */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -128,20 +111,36 @@ function Header() {
               </Menu>
             </Box>
 
+            {/* "ROYALKING" name after the mobile menu icon */}
+            <Typography
+              variant="h6"
+              noWrap
+              component={Link}
+              to="/"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+                fontSize: { xs: "1.5rem", md: "2rem" },
+              }}
+            >
+              ROYALKING
+            </Typography>
+
             {/* Desktop menu */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={()=>handleCloseNavMenu(`/${page.toLowerCase()}`)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  <Link
-                    to={`/${page.toLowerCase()}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
+                 
                     {page}
-                  </Link>
                 </Button>
               ))}
             </Box>
@@ -181,18 +180,42 @@ function Header() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                 <MenuItem  onClick={handleCloseUserMenu}>
                     <Typography sx={{ textAlign: "center" }}>
                       <Link
-                        to={`/${setting.toLowerCase()}`}
+                        to={`/${"Profile".toLowerCase()}`}
                         style={{ textDecoration: "none", color: "inherit" }}
                       >
-                        {setting}
+                        Profile
                       </Link>
                     </Typography>
                   </MenuItem>
-                ))}
+                  <MenuItem  onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: "center" }}>
+                      <Link
+                        to={`/${"Dashboard".toLowerCase()}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                       Dashboard
+                      </Link>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem  onClick={handleCloseUserMenu}>
+                    <Typography sx={{ textAlign: "center" }}>
+                      {isLoggedIn?<Link
+                        to={`/${"Dashboard".toLowerCase()}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                       Logout
+                      </Link>:<Link
+                        to={`/${"Dashboard".toLowerCase()}`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                       Login
+                      </Link>}
+                    </Typography>
+                  </MenuItem>
+                
               </Menu>
             </Box>
           </Toolbar>

@@ -10,6 +10,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../Redux/Slice";
+import "./Products.css"
 
 const cardData = [
   {
@@ -84,7 +85,6 @@ const cardData = [
     description: 300,
     image: "imageCart/img13.jpg",
   },
- 
 
   // Add more items here...
 ];
@@ -93,48 +93,39 @@ const Products = () => {
   const dispatch = useDispatch();
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        marginTop: "30px",
-      }}
-    >
-      {/* Main Content */}
-      <Box sx={{ flex: 1, padding: "20px" }}>
-        <Typography
-          variant="h4"
-          sx={{ mb: 4, textAlign: "center", marginTop: "20px" }}
-        >
+    <Box className="products-container">
+      <Box className="products-main-content">
+        <Typography variant="h4" className="products-title">
           PRODUCTS
         </Typography>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={2} className="card-grid">
           {cardData.map((card) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
-              <Card sx={{ maxWidth: 345, margin: "auto" }}>
+              <Card className="card-item">
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    height="300"
+                    className="card-media"
                     image={card.image}
                     alt={card.title}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      className="card-title"
+                    >
                       {card.title}
                     </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "text.secondary" }}
-                    >
+                    <Typography variant="body2" className="card-price">
                       ₹ {card.description}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
                   <Button
-                    onClick={() => {
+                    onClick={() =>
                       dispatch(
                         addItem({
                           id: card.id,
@@ -142,10 +133,9 @@ const Products = () => {
                           title: card.title,
                           description: card.description,
                         })
-                      );
-                    }}
-                    size="small"
-                    color="primary"
+                      )
+                    }
+                    className="add-to-cart-btn"
                   >
                     Add to Cart
                   </Button>

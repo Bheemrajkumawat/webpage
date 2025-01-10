@@ -1,0 +1,61 @@
+/* Footer.css */
+.footer-container {
+  background-color: #1976d2; /* नीले रंग का उदाहरण */
+  color: white;
+  padding: 10px 0;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-grid .footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.footer-quick-links a {
+  margin-right: 8px;
+  font-size: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-quick-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 5px;
+  font-size: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
