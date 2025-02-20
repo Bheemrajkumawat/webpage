@@ -19,14 +19,35 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Get cart state and user state
   const { cartItems, cartTotalAmount } = useSelector((state) => state.cart);
+  // User login status
+  const { isLoggedIn} = useSelector((state) => state.user);
+
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleBuyNow = () => {
+    if (!isLoggedIn) {
+      // Redirect to login page if not logged in
+      navigate("/login");
+      return;
+    }
+
     setIsRedirecting(true);
+
+    // Simulate a successful purchase and show a success message
     setTimeout(() => {
-      navigate("/payment");
-    }, 2000); // Delay for loader
+      setIsRedirecting(false);
+      // Show success message after 2 seconds
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        // Hide success message after 3 seconds
+        setShowSuccessMessage(false);
+      }, 3000);
+      // Simulate a delay for loading
+    }, 2000);
   };
 
   return (
@@ -111,6 +132,15 @@ const Cart = () => {
                 "Buy Now"
               )}
             </Button>
+            {showSuccessMessage && (
+              <Typography
+                variant="h6"
+                color="success"
+                className="success-message"
+              >
+                Purchase Successful!
+              </Typography>
+            )}
           </>
         ) : (
           <Typography variant="h6" className="empty-cart-message">

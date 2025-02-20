@@ -1,12 +1,13 @@
 import React from "react";
-import { Box, Typography, TextField, Button, Grid, Paper } from "@mui/material";
+import { Box, Typography, Grid, Paper } from "@mui/material";
 
 const Contact = () => {
   return (
     <Box
       sx={{
-        marginTop: "80px", // Adjust for fixed header
-        paddingBottom: "80px", // Adjust for fixed footer
+      
+        marginTop: "80px", 
+        paddingBottom: "80px", 
         padding: "20px",
         backgroundColor: "#f9f9f9",
       }}
@@ -23,73 +24,29 @@ const Contact = () => {
         Contact Us
       </Typography>
 
-      {/* Contact Form */}
-      <Paper
-        elevation={3}
-        sx={{
-          padding: "20px",
-          marginBottom: "20px",
-          backgroundColor: "#fff",
-          maxWidth: "600px",
-          margin: "0 auto",
-        }}
-      >
-        <Typography
-          variant="h6"
-          sx={{ textAlign: "center", fontWeight: "bold", marginBottom: "10px" }}
-        >
-          Get in Touch
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            textAlign: "center",
-            color: "#666",
-            marginBottom: "20px",
-          }}
-        >
-          Have a question or need help? Fill out the form below and we’ll get
-          back to you as soon as possible.
-        </Typography>
-        <form>
-          <TextField
-            fullWidth
-            label="Name"
-            variant="outlined"
-            sx={{ marginBottom: "15px" }}
-          />
-          <TextField
-            fullWidth
-            label="Email"
-            type="email"
-            variant="outlined"
-            sx={{ marginBottom: "15px" }}
-          />
-          <TextField
-            fullWidth
-            label="Message"
-            multiline
-            rows={4}
-            variant="outlined"
-            sx={{ marginBottom: "20px" }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ padding: "10px" }}
-          >
-            Send Message
-          </Button>
-        </form>
-      </Paper>
-
-      {/* Contact Information */}
+      {/* Contact Banner */}
       <Box
         sx={{
-          marginTop: "20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "500px",
+          backgroundImage: "url('imageAbout/tropical-shirt-on-blue-background-with-copyspace-generative-ai-photo.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "10px",
+          color: "white",
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: "24px",
+          marginBottom: "20px",
         }}
       >
+        Get in Touch with Us!
+      </Box>
+
+      {/* Contact Information */}
+      <Box sx={{ marginTop: "20px" }}>
         <Typography
           variant="h6"
           sx={{ textAlign: "center", fontWeight: "bold", marginBottom: "10px" }}
@@ -113,7 +70,7 @@ const Contact = () => {
                 Email
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
-                support@ecommerce.com
+                bheemrajkumawat127@gmail.com
               </Typography>
             </Paper>
           </Grid>
@@ -133,7 +90,7 @@ const Contact = () => {
                 Phone
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
-                +1 234 567 890
+               +91 9983392931
               </Typography>
             </Paper>
           </Grid>
@@ -153,7 +110,7 @@ const Contact = () => {
                 Address
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
-                123 E-commerce St, Online City, Webland
+                shishu(sikar)
               </Typography>
             </Paper>
           </Grid>

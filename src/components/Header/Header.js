@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,17 +13,18 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import Badge from "@mui/material/Badge";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
+import { logoutUser } from "../../Redux/Slice";
+import { CgProfile } from "react-icons/cg";
 
 const pages = ["Products", "Cart"];
-const settings = ["Profile", "Dashboard","Login"];
 
 function Header() {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,7 +35,8 @@ function Header() {
   };
 
   const handleCloseNavMenu = (url) => {
-    navigate(url)
+    setAnchorElNav(null);
+    navigate(url);
   };
 
   const handleCloseUserMenu = () => {
@@ -42,34 +44,42 @@ function Header() {
   };
 
   const cartItems = useSelector((state) => state.cart.cartItems || []);
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  
-
-  console.log("Items", cartItems);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleCartClick = () => {
     if (cartItems.length > 0) {
-      // Navigate to cart if items are present
       navigate("/cart");
     } else {
-      // Show "Cart is empty" message
       setOpenSnackbar(true);
     }
   };
 
   const handleCloseSnackbar = () => {
-    // Close the snackbar after 3 seconds
     setOpenSnackbar(false);
   };
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/login");
+  };
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     navigate("/cart");
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   return (
     <>
       <AppBar sx={{ top: 0, width: "100%" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* Mobile menu icon first */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -84,34 +94,23 @@ function Header() {
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
                 keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
+                transformOrigin={{ vertical: "top", horizontal: "left" }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      <Link
-                        to={`/${page.toLowerCase()}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                        {page}
-                      </Link>
-                    </Typography>
+                  <MenuItem
+                    key={page}
+                    onClick={() => handleCloseNavMenu(`/${page.toLowerCase()}`)}
+                  >
+                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
 
-            {/* "ROYALKING" name after the mobile menu icon */}
             <Typography
               variant="h6"
               noWrap
@@ -131,21 +130,18 @@ function Header() {
               ROYALKING
             </Typography>
 
-            {/* Desktop menu */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={()=>handleCloseNavMenu(`/${page.toLowerCase()}`)}
+                  onClick={() => handleCloseNavMenu(`/${page.toLowerCase()}`)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                 
-                    {page}
+                  {page}
                 </Button>
               ))}
             </Box>
 
-            {/* Cart and Avatar */}
             <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
               <Tooltip title="Shopping Cart">
                 <IconButton
@@ -160,7 +156,9 @@ function Header() {
 
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="User Avatar">
+                    <CgProfile />
+                  </Avatar>
                 </IconButton>
               </Tooltip>
 
@@ -168,59 +166,46 @@ function Header() {
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                 <MenuItem  onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
+                <MenuItem>
+                  <Typography sx={{ textAlign: "center" }}>
+                    <Link
+                      to="/profile"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      Profile
+                    </Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: "center" }}>
+                    {isLoggedIn ? (
                       <Link
-                        to={`/${"Profile".toLowerCase()}`}
+                        to="/login"
                         style={{ textDecoration: "none", color: "inherit" }}
+                        onClick={handleLogout}
                       >
-                        Profile
+                        Logout
                       </Link>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem  onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
+                    ) : (
                       <Link
-                        to={`/${"Dashboard".toLowerCase()}`}
+                        to="/login"
                         style={{ textDecoration: "none", color: "inherit" }}
                       >
-                       Dashboard
+                        Login
                       </Link>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem  onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      {isLoggedIn?<Link
-                        to={`/${"Dashboard".toLowerCase()}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                       Logout
-                      </Link>:<Link
-                        to={`/${"Dashboard".toLowerCase()}`}
-                        style={{ textDecoration: "none", color: "inherit" }}
-                      >
-                       Login
-                      </Link>}
-                    </Typography>
-                  </MenuItem>
-                
+                    )}
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
 
-          {/* Snackbar for "Cart is empty" message */}
           <Snackbar
             open={openSnackbar}
             autoHideDuration={3000}

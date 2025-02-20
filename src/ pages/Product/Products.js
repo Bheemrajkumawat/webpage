@@ -28,13 +28,13 @@ const cardData = [
   {
     id: 3,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 400,
     image: "imageCart/img3.jpg",
   },
   {
     id: 4,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 500,
     image: "imageCart/img4.jpg",
   },
   {
@@ -46,43 +46,43 @@ const cardData = [
   {
     id: 6,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 200,
     image: "imageCart/img7.jpg",
   },
   {
     id: 7,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 400,
     image: "imageCart/img8.jpg",
   },
   {
     id: 8,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 700,
     image: "imageCart/img9.jpg",
   },
   {
     id: 9,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 100,
     image: "imageCart/img10.jpg",
   },
   {
     id: 10,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 800,
     image: "imageCart/img11.jpg",
   },
   {
     id: 11,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 900,
     image: "imageCart/img12.jpg",
   },
   {
     id: 12,
     title: "Casual T-Shirt",
-    description: 300,
+    description: 200,
     image: "imageCart/img13.jpg",
   },
 

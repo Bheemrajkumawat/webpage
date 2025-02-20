@@ -6,8 +6,8 @@ const About = () => {
     <Box
       sx={{
         padding: "20px",
-        marginTop: "80px", // Adjust for fixed header
-        paddingBottom: "80px", // Adjust for fixed footer
+        marginTop: "80px", 
+        paddingBottom: "80px", 
         backgroundColor: "#f9f9f9",
       }}
     >
@@ -109,34 +109,98 @@ const About = () => {
           Meet Our Team
         </Typography>
         <Grid container spacing={3} justifyContent="center">
-          {[1, 2, 3].map((member) => (
-            <Grid item xs={12} sm={4} key={member}>
-              <Paper
-                elevation={3}
+          {/* Team Member 1 */}
+          <Grid item xs={12} sm={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                padding: "20px",
+                textAlign: "center",
+                backgroundColor: "#fff",
+              }}
+            >
+              <Avatar
+                alt={`Team Member 1`}
+                src={`imageAbout/bk.jpeg`} 
                 sx={{
-                  padding: "20px",
-                  textAlign: "center",
-                  backgroundColor: "#fff",
+                  width: "80px",
+                  height: "80px",
+                  margin: "0 auto 10px auto",
                 }}
-              >
-                <Avatar
-                  alt={`Team Member ${member}`}
-                  src={`https://via.placeholder.com/150`}
-                  sx={{
-                    width: "80px",
-                    height: "80px",
-                    margin: "0 auto 10px auto",
-                  }}
-                />
-                <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                  Team Member {member}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "#666" }}>
-                  Position {member}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
+              />
+              <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                Team Member 1
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                bhimrajkumawat
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                Position 1
+              </Typography>
+            </Paper>
+          </Grid>
+
+          {/* Team Member 2 */}
+          <Grid item xs={12} sm={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                padding: "20px",
+                textAlign: "center",
+                backgroundColor: "#fff",
+              }}
+            >
+              <Avatar
+                alt={`Team Member 2`}
+                src={`imageAbout/nk.jpeg`}  // Update image path
+                sx={{
+                  width: "80px",
+                  height: "80px",
+                  margin: "0 auto 10px auto",
+                }}
+              />
+              <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                Team Member 2
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                Nareshkumawat
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                Position 2
+              </Typography>
+            </Paper>
+          </Grid>
+
+          {/* Team Member 3 */}
+          <Grid item xs={12} sm={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                padding: "20px",
+                textAlign: "center",
+                backgroundColor: "#fff",
+              }}
+            >
+              <Avatar
+                alt={`Team Member 3`}
+                src={`imageAbout/sk.jpeg`}  // Update image path
+                sx={{
+                  width: "80px",
+                  height: "80px",
+                  margin: "0 auto 10px auto",
+                }}
+              />
+              <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                Team Member 3
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                Sandeepkumawat
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#666" }}>
+                Position 3
+              </Typography>
+            </Paper>
+          </Grid>
         </Grid>
       </Box>
 
@@ -151,7 +215,7 @@ const About = () => {
         }}
       >
         <Typography variant="body2" sx={{ color: "#666" }}>
-          © 2024 [ROYALKING]. All rights reserved.
+          © 2025 [ROYALKING]. All rights reserved.
         </Typography>
       </Box>
     </Box>
