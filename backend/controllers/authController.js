@@ -1,10 +1,30 @@
 const User = require("../ models/User");
+const Order = require("../ models/Order");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path");
+require("dotenv").config();
 
+// 🔹 Configure Multer for Image Upload
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: (req, file, cb) => {
+    cb(null, `${req.userId}_${Date.now()}${path.extname(file.originalname)}`);
+  },
+});
+const upload = multer({ storage });
 // Register a new user
 const registerUser = async (req, res) => {
-  const { email_address, password, firstname, lastname } = req.body;
+  const {
+    email_address,
+    password,
+    firstname,
+    lastname,
+    phone_number,
+    address,
+    pincode,
+  } = req.body;
   const existingUser = await User.findOne({ email_address });
   if (existingUser) {
     return res.status(400).json({ message: "User already exists" });
@@ -16,9 +36,15 @@ const registerUser = async (req, res) => {
     password: hashedPassword,
     firstname,
     lastname,
+    phone_number,
+    address,
+    pincode,
+    // Default empty image field
+    profileImage: "",
   });
   newUser
-    .save() // Corrected to instance method
+    // Corrected to instance method
+    .save()
     .then(() => {
       res.json({ message: "Employee added successfully", isSuccess: true });
     })
@@ -57,7 +83,15 @@ const loginUser = async (req, res) => {
     res.status(200).json({
       token,
       message: "Login Successful",
-      user: { id: user._id, email: user.email_address, name: user.firstname },
+      user: {
+        id: user._id,
+        email: user.email_address,
+        name: user.firstname,
+        phone_number: user.phone_number,
+        address: user.address,
+        pincode: user.pincode,
+        profileImage: user.profileImage,
+      },
     });
   } catch (error) {
     console.error("Login Error:", error);
@@ -81,4 +115,63 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile };
+// 🔹 Upload Profile Image
+const uploadProfileImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    const imageUrl = `http://localhost:4000/uploads/${req.file.filename}`;
+    await User.findByIdAndUpdate(req.userId, { profileImage: imageUrl });
+
+    res.json({ message: "Profile image uploaded successfully", imageUrl });
+  } catch (error) {
+    console.error("Image Upload Error:", error);
+    res.status(500).json({ message: "Error uploading image" });
+  }
+};
+
+const addOrder = async (req, res) => {
+  try {
+    const { items, totalPrice } = req.body;
+
+    if (!items || items.length === 0) {
+      return res.status(400).json({ message: "Cart is empty" });
+    }
+
+    // Ensure each item has a price
+    const updatedItems = items.map((item) => ({
+      ...item,
+      price: item.price,
+    }));
+
+    const newOrder = new Order({ items: updatedItems, totalPrice });
+    await newOrder.save();
+
+    res
+      .status(201)
+      .json({ message: "Order placed successfully", order: newOrder });
+  } catch (error) {
+    console.error("Error placing order:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+module.exports = {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  uploadProfileImage,
+  addOrder,
+  getOrders,
+};

@@ -10,79 +10,79 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../Redux/Slice";
-import "./Products.css"
+import "./Products.css";
 
 const cardData = [
   {
     id: 1,
     title: "Spread Collar Shirt",
-    description: 500,
+    price: 500,
     image: "imageCart/img1.jpg",
   },
   {
     id: 2,
     title: "Slim Fit Jeans",
-    description: 600,
+    price: 600,
     image: "imageCart/img2.jpg",
   },
   {
     id: 3,
     title: "Casual T-Shirt",
-    description: 400,
+    price: 400,
     image: "imageCart/img3.jpg",
   },
   {
     id: 4,
     title: "Casual T-Shirt",
-    description: 500,
+    price: 500,
     image: "imageCart/img4.jpg",
   },
   {
     id: 5,
     title: "Casual T-Shirt",
-    description: 300,
+    price: 300,
     image: "imageCart/img5.jpg",
   },
   {
     id: 6,
     title: "Casual T-Shirt",
-    description: 200,
+    price: 200,
     image: "imageCart/img7.jpg",
   },
   {
     id: 7,
     title: "Casual T-Shirt",
-    description: 400,
+    price: 400,
     image: "imageCart/img8.jpg",
   },
   {
     id: 8,
     title: "Casual T-Shirt",
-    description: 700,
+    price: 700,
     image: "imageCart/img9.jpg",
   },
   {
     id: 9,
     title: "Casual T-Shirt",
-    description: 100,
+    price: 100,
     image: "imageCart/img10.jpg",
   },
   {
     id: 10,
     title: "Casual T-Shirt",
-    description: 800,
+    price: 800,
     image: "imageCart/img11.jpg",
   },
   {
     id: 11,
     title: "Casual T-Shirt",
-    description: 900,
+    price: 900,
     image: "imageCart/img12.jpg",
   },
   {
     id: 12,
     title: "Casual T-Shirt",
-    description: 200,
+    price: 200,
     image: "imageCart/img13.jpg",
   },
 
@@ -119,7 +119,7 @@ const Products = () => {
                       {card.title}
                     </Typography>
                     <Typography variant="body2" className="card-price">
-                      ₹ {card.description}
+                      ₹ {card.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -131,7 +131,8 @@ const Products = () => {
                           id: card.id,
                           image: card.image,
                           title: card.title,
-                          description: card.description,
+                          price: card.price,
+                          quantity: 1,
                         })
                       )
                     }

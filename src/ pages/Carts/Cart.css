@@ -1,7 +1,7 @@
 .cart-container {
-  padding: 20px;
+  padding: 400px;
   max-width: 1000px;
-  margin: 70px auto 0; 
+  margin: 70px auto 0;
 }
 
 .table-container {
@@ -39,4 +39,19 @@
   text-align: center;
   font-size: 18px;
   color: #888;
+}
+
+.full-screen-loader {
+  z-index: 1300;
+  color: white;
+}
+
+.empty-cart-message {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.buy-now-button {
+  display: block;
+  margin: 20px auto;
 }

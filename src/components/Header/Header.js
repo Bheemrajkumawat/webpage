@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,14 +17,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
 import { logoutUser } from "../../Redux/Slice";
-import { CgProfile } from "react-icons/cg";
 
 const pages = ["Products", "Cart"];
 
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,11 +45,6 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  const cartItems = useSelector((state) => state.cart.cartItems || []);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
   const handleCartClick = () => {
     if (cartItems.length > 0) {
       navigate("/cart");
@@ -60,20 +57,29 @@ function Header() {
     setOpenSnackbar(false);
   };
 
-  const dispatch = useDispatch();
-
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/login");
   };
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     navigate("/cart");
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // }, []);
+
+  // Redux से user data और login state
+  const user = useSelector((state) => state.user.userData || null);
+  const cartItems = useSelector((state) => state.cart.cartItems || []);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  // Local Storage से user डेटा लेना
+  const [localUser, setLocalUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+
+  useEffect(() => {
+    if (user) {
+      setLocalUser(user);
+    }
+  }, [user]);
+
+  // अगर profile image नहीं है, तो पहले अक्षर को दिखाने के लिए
+  const firstLetter = localUser?.firstname?.charAt(0)?.toUpperCase() || "U";
 
   return (
     <>
@@ -84,8 +90,6 @@ function Header() {
               <IconButton
                 size="large"
                 aria-label="menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
@@ -110,7 +114,6 @@ function Header() {
                 ))}
               </Menu>
             </Box>
-
             <Typography
               variant="h6"
               noWrap
@@ -154,10 +157,11 @@ function Header() {
                 </IconButton>
               </Tooltip>
 
+              {/* Avatar Update - अब Profile Image को सही तरीके से दिखाएगा */}
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="User Avatar">
-                    <CgProfile />
+                  <Avatar alt="User Avatar" src={localUser?.profileImage || ""}>
+                    {!localUser?.profileImage && firstLetter}
                   </Avatar>
                 </IconButton>
               </Tooltip>

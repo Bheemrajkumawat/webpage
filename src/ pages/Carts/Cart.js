@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./Cart.css";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementItem, decrementItem, removeItem } from "../../Redux/Slice";
+import {
+  incrementItem,
+  decrementItem,
+  removeItem,
+  clearCart,
+} from "../../Redux/Slice";
 import {
   Button,
   Typography,
@@ -13,6 +18,7 @@ import {
   TableRow,
   Paper,
   CircularProgress,
+  Backdrop,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -20,42 +26,52 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get cart state and user state
   const { cartItems, cartTotalAmount } = useSelector((state) => state.cart);
-  // User login status
-  const { isLoggedIn} = useSelector((state) => state.user);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
-  const [isRedirecting, setIsRedirecting] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleBuyNow = () => {
+  // ✅ Handle Buy Now Function
+  const handleBuyNow = async () => {
     if (!isLoggedIn) {
-      // Redirect to login page if not logged in
       navigate("/login");
       return;
     }
 
-    setIsRedirecting(true);
+    setIsProcessing(true); 
 
-    // Simulate a successful purchase and show a success message
-    setTimeout(() => {
-      setIsRedirecting(false);
-      // Show success message after 2 seconds
-      setShowSuccessMessage(true);
+    try {
+      const response = await fetch("http://localhost:4000/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cartItems, totalPrice: cartTotalAmount }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log("Order placed successfully:", data);
+
+      dispatch(clearCart());
+
       setTimeout(() => {
-        // Hide success message after 3 seconds
-        setShowSuccessMessage(false);
-      }, 3000);
-      // Simulate a delay for loading
-    }, 2000);
+        setIsProcessing(false);
+        navigate("/orders");
+      }, 2000);
+    } catch (error) {
+      console.error("Order error:", error);
+      setIsProcessing(false);
+    }
   };
 
   return (
     <div className="cart-container">
       <TableContainer component={Paper} className="table-container">
         {cartItems.length > 0 ? (
-          <>
-            <Table sx={{ minWidth: 650 }} aria-label="cart table">
+          <div className="table-wrapper">
+            <Table sx={{ minWidth: 800 }} aria-label="cart table">
               <TableHead>
                 <TableRow>
                   <TableCell align="center">Image</TableCell>
@@ -99,9 +115,9 @@ const Cart = () => {
                         </Button>
                       </div>
                     </TableCell>
-                    <TableCell align="center">₹{item.description}</TableCell>
+                    <TableCell align="center">₹{item.price}</TableCell>
                     <TableCell align="center">
-                      ₹{item.quantity * item.description}
+                      ₹{item.quantity * item.price}
                     </TableCell>
                     <TableCell align="center">
                       <Button
@@ -125,29 +141,30 @@ const Cart = () => {
               color="primary"
               onClick={handleBuyNow}
               className="buy-now-button"
+              disabled={isProcessing}
             >
-              {isRedirecting ? (
-                <CircularProgress size={24} sx={{ color: "#fff" }} />
-              ) : (
-                "Buy Now"
-              )}
+              Buy Now
             </Button>
-            {showSuccessMessage && (
-              <Typography
-                variant="h6"
-                color="success"
-                className="success-message"
-              >
-                Purchase Successful!
-              </Typography>
-            )}
-          </>
+          </div>
         ) : (
           <Typography variant="h6" className="empty-cart-message">
             Your cart is empty.
           </Typography>
         )}
       </TableContainer>
+
+      {/* ✅ Full-screen Loader (Only on Buy Now Click) */}
+      {isProcessing && (
+        <Backdrop
+          open={true}
+          sx={{
+            color: "#fff",
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+          }}
+        >
+          <CircularProgress size={60} />
+        </Backdrop>
+      )}
     </div>
   );
 };

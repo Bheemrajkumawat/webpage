@@ -6,8 +6,8 @@ const About = () => {
     <Box
       sx={{
         padding: "20px",
-        marginTop: "80px", 
-        paddingBottom: "80px", 
+        marginTop: "80px",
+        paddingBottom: "80px",
         backgroundColor: "#f9f9f9",
       }}
     >
@@ -121,7 +121,7 @@ const About = () => {
             >
               <Avatar
                 alt={`Team Member 1`}
-                src={`imageAbout/bk.jpeg`} 
+                src={`imageAbout/bk.jpeg`}
                 sx={{
                   width: "80px",
                   height: "80px",
@@ -152,7 +152,8 @@ const About = () => {
             >
               <Avatar
                 alt={`Team Member 2`}
-                src={`imageAbout/nk.jpeg`}  // Update image path
+                // Update image path
+                src={`imageAbout/nk.jpeg`}
                 sx={{
                   width: "80px",
                   height: "80px",
@@ -183,7 +184,7 @@ const About = () => {
             >
               <Avatar
                 alt={`Team Member 3`}
-                src={`imageAbout/sk.jpeg`}  // Update image path
+                src={`imageAbout/sk.jpeg`} // Update image path
                 sx={{
                   width: "80px",
                   height: "80px",

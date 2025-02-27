@@ -14,6 +14,9 @@ import LoginPage from "../profile/Loginpage/LoginPage";
 import RegistrationForm from "../profile/RegistrationForm";
 
 import PrivateRoute from "./ PrivateRoute";
+import Orders from "../ pages/orderes/Orders";
+import Pyment from "../ pages/pyment/Pyment";
+import OrderHistory from "../ pages/Order History/OrderHistory";
 
 // import { useSelector } from "react-redux";
 
@@ -31,10 +34,16 @@ export default function Router() {
           <Route path="/cart" element={<Cart />}></Route>
 
           <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/payment" element={<Pyment />} />
+          <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/about" element={<About />}></Route>
 
           {/* Protect the Profile route using PrivateRoute */}
-          <Route path="/profile" element={<PrivateRoute Component={Profile} />} />
+          <Route
+            path="/profile"
+            element={<PrivateRoute Component={Profile} />}
+          />
           <Route path="/RegistrationForm" element={<RegistrationForm />} />
           <Route />
           <Route path="/login" element={<LoginPage />}></Route>
