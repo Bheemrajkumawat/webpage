@@ -41,7 +41,4 @@ router.post(
   uploadProfileImage
 );
 
-router.post("/", addOrder);
-router.get("/", getOrders);
-
 module.exports = router;
